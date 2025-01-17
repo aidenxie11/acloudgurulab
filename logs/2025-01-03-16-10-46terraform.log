@@ -1,0 +1,46 @@
+2025-01-03T16:10:46.537+0800 [INFO]  Terraform version: 1.9.5
+2025-01-03T16:10:46.567+0800 [DEBUG] using github.com/hashicorp/go-tfe v1.58.0
+2025-01-03T16:10:46.567+0800 [DEBUG] using github.com/hashicorp/hcl/v2 v2.20.0
+2025-01-03T16:10:46.567+0800 [DEBUG] using github.com/hashicorp/terraform-svchost v0.1.1
+2025-01-03T16:10:46.567+0800 [DEBUG] using github.com/zclconf/go-cty v1.14.4
+2025-01-03T16:10:46.567+0800 [INFO]  Go runtime version: go1.22.5
+2025-01-03T16:10:46.567+0800 [INFO]  CLI args: []string{"C:\\Users\\z0017865\\scoop\\apps\\terraform\\current\\terraform.exe", "apply", "-auto-approve"}
+2025-01-03T16:10:46.570+0800 [TRACE] Stdout is a terminal of width 161
+2025-01-03T16:10:46.571+0800 [TRACE] Stderr is a terminal of width 161
+2025-01-03T16:10:46.571+0800 [TRACE] Stdin is a terminal
+2025-01-03T16:10:46.578+0800 [DEBUG] Attempting to open CLI config file: C:\Users\z0017865\AppData\Roaming\terraform.rc
+2025-01-03T16:10:46.578+0800 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2025-01-03T16:10:46.578+0800 [INFO]  Loading CLI configuration from C:\Users\z0017865\AppData\Roaming\terraform.d\credentials.tfrc.json
+2025-01-03T16:10:46.579+0800 [DEBUG] checking for credentials in "C:\\Users\\z0017865\\AppData\\Roaming\\terraform.d\\plugins"
+2025-01-03T16:10:46.579+0800 [DEBUG] checking for credentials in "C:\\Users\\z0017865\\AppData\\Roaming\\terraform.d\\plugins\\windows_amd64"
+2025-01-03T16:10:46.579+0800 [DEBUG] ignoring non-existing provider search directory terraform.d/plugins
+2025-01-03T16:10:46.579+0800 [DEBUG] will search for provider plugins in C:\Users\z0017865\AppData\Roaming\terraform.d\plugins
+2025-01-03T16:10:46.582+0800 [DEBUG] ignoring non-existing provider search directory C:\Users\z0017865\AppData\Roaming\HashiCorp\Terraform\plugins
+2025-01-03T16:10:46.582+0800 [INFO]  CLI command args: []string{"apply", "-auto-approve"}
+2025-01-03T16:10:46.592+0800 [TRACE] Meta.Backend: built configuration for "cloud" backend with hash value 2919452051
+2025-01-03T16:10:46.593+0800 [TRACE] Meta.Backend: working directory was previously initialized for "cloud" backend
+2025-01-03T16:10:46.593+0800 [TRACE] Meta.Backend: using already-initialized, unchanged "cloud" backend configuration
+2025-01-03T16:10:46.593+0800 [TRACE] cloud: using hostname "" from TF_CLOUD_HOSTNAME variable
+2025-01-03T16:10:46.593+0800 [TRACE] cloud: using default hostname "app.terraform.io"
+2025-01-03T16:10:46.593+0800 [TRACE] cloud: using organization "learning_aiden" from cloud config block
+2025-01-03T16:10:46.593+0800 [TRACE] cloud: found workspace name "terraform-config" in cloud config block
+2025-01-03T16:10:46.593+0800 [TRACE] cloud: using project "" from TF_CLOUD_PROJECT variable
+2025-01-03T16:10:46.593+0800 [TRACE] cloud: using workspace name "terraform-config" from cloud config block
+2025-01-03T16:10:46.593+0800 [DEBUG] Service discovery for app.terraform.io at https://app.terraform.io/.well-known/terraform.json
+2025-01-03T16:10:46.593+0800 [TRACE] HTTP client GET request to https://app.terraform.io/.well-known/terraform.json
+2025-01-03T16:10:48.802+0800 [TRACE] Meta.BackendForPlan: backend *cloud.Cloud supports operations
+2025-01-03T16:10:48.803+0800 [DEBUG] Service discovery for app.terraform.io aliased as localterraform.com
+2025-01-03T16:10:48.803+0800 [TRACE] Meta.Backend: instantiated backend of type *cloud.Cloud
+2025-01-03T16:10:48.804+0800 [TRACE] providercache.fillMetaCache: scanning directory .terraform\providers
+2025-01-03T16:10:48.806+0800 [TRACE] getproviders.SearchLocalDirectory: found registry.terraform.io/hashicorp/azurerm v4.14.0 for windows_amd64 at .terraform\providers\registry.terraform.io\hashicorp\azurerm\4.14.0\windows_amd64
+2025-01-03T16:10:48.807+0800 [TRACE] getproviders.SearchLocalDirectory: found registry.terraform.io/hashicorp/local v2.5.2 for windows_amd64 at .terraform\providers\registry.terraform.io\hashicorp\local\2.5.2\windows_amd64
+2025-01-03T16:10:48.807+0800 [TRACE] providercache.fillMetaCache: including .terraform\providers\registry.terraform.io\hashicorp\azurerm\4.14.0\windows_amd64 as a candidate package for registry.terraform.io/hashicorp/azurerm 4.14.0
+2025-01-03T16:10:48.807+0800 [TRACE] providercache.fillMetaCache: including .terraform\providers\registry.terraform.io\hashicorp\local\2.5.2\windows_amd64 as a candidate package for registry.terraform.io/hashicorp/local 2.5.2
+2025-01-03T16:10:48.968+0800 [TRACE] providercache.fillMetaCache: using cached result from previous scan of .terraform\providers
+2025-01-03T16:10:48.982+0800 [DEBUG] checking for provisioner in "."
+2025-01-03T16:10:48.982+0800 [DEBUG] checking for provisioner in "C:\\Users\\z0017865\\scoop\\apps\\terraform\\current"
+2025-01-03T16:10:48.982+0800 [DEBUG] checking for provisioner in "C:\\Users\\z0017865\\AppData\\Roaming\\terraform.d\\plugins"
+2025-01-03T16:10:48.982+0800 [DEBUG] checking for provisioner in "C:\\Users\\z0017865\\AppData\\Roaming\\terraform.d\\plugins\\windows_amd64"
+2025-01-03T16:10:48.982+0800 [TRACE] Meta.Backend: backend *cloud.Cloud supports operations
+2025-01-03T16:10:49.291+0800 [INFO]  cloud: starting Apply operation
+2025-01-03T16:10:49.292+0800 [TRACE] Running new cloud plan for apply
