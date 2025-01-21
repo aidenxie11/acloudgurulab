@@ -3,9 +3,9 @@ variable "azure_subscription_id" {
 }
 
 variable "resource_group_name" {
-    default = "1-becca745-playground-sandbox"
+    default = "1-19193002-playground-sandbox"
 }
 
 variable "location" {
-    default = "East US"
+    default = "South Central US"
 }

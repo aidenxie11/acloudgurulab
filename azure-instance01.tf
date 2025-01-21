@@ -2,7 +2,7 @@ variable "prefix" {
   default = "test-aiden"
 }
 
-resource "azurerm_resource_group" "example" {
+resource "azurerm_resource_group" "myrg" {
   name     = var.resource_group_name
   location = var.location
 }
@@ -11,14 +11,14 @@ resource "azurerm_resource_group" "example" {
 resource "azurerm_virtual_network" "main" {
   name                = "${var.prefix}-network"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.myrg.location
+  resource_group_name = azurerm_resource_group.myrg.name
 }
 
 # 创建子网
 resource "azurerm_subnet" "internal" {
   name                 = "internal"
-  resource_group_name  = azurerm_resource_group.example.name
+  resource_group_name  = azurerm_resource_group.myrg.name
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = ["10.0.2.0/24"]
 }
@@ -26,24 +26,24 @@ resource "azurerm_subnet" "internal" {
 # 创建公共 IP 地址（Standard SKU + Static）
 resource "azurerm_public_ip" "main" {
   name                = "${var.prefix}-publicip"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.myrg.location
+  resource_group_name = azurerm_resource_group.myrg.name
   allocation_method   = "Static" # 必须为 Static
   sku                 = "Standard" # Standard SKU
 }
 
 # 创建应用程序安全组（ASG）
-resource "azurerm_application_security_group" "example" {
+resource "azurerm_application_security_group" "myrg" {
   name                = "${var.prefix}-asg"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.myrg.location
+  resource_group_name = azurerm_resource_group.myrg.name
 }
 
 # 创建网络安全组（NSG）并添加入站规则
-resource "azurerm_network_security_group" "example" {
+resource "azurerm_network_security_group" "myrg" {
   name                = "${var.prefix}-nsg"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.myrg.location
+  resource_group_name = azurerm_resource_group.myrg.name
 
   security_rule {
     name                       = "allow-ssh"
@@ -71,16 +71,16 @@ resource "azurerm_network_security_group" "example" {
 }
 
 # 将网络安全组关联到子网
-resource "azurerm_subnet_network_security_group_association" "example" {
+resource "azurerm_subnet_network_security_group_association" "myrg" {
   subnet_id                 = azurerm_subnet.internal.id
-  network_security_group_id = azurerm_network_security_group.example.id
+  network_security_group_id = azurerm_network_security_group.myrg.id
 }
 
 # 创建网络接口，并关联公共 IP 地址和应用程序安全组
 resource "azurerm_network_interface" "main" {
   name                = "${var.prefix}-nic"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.myrg.location
+  resource_group_name = azurerm_resource_group.myrg.name
 
   ip_configuration {
     name                          = "testconfiguration1"
@@ -91,16 +91,16 @@ resource "azurerm_network_interface" "main" {
 }
 
 # 将网络接口关联到应用程序安全组
-resource "azurerm_network_interface_application_security_group_association" "example" {
+resource "azurerm_network_interface_application_security_group_association" "myrg" {
   network_interface_id          = azurerm_network_interface.main.id
-  application_security_group_id = azurerm_application_security_group.example.id
+  application_security_group_id = azurerm_application_security_group.myrg.id
 }
 
 # 创建虚拟机
 resource "azurerm_virtual_machine" "main" {
   name                  = "${var.prefix}-vm"
-  location              = azurerm_resource_group.example.location
-  resource_group_name   = azurerm_resource_group.example.name
+  location              = azurerm_resource_group.myrg.location
+  resource_group_name   = azurerm_resource_group.myrg.name
   network_interface_ids = [azurerm_network_interface.main.id]
   vm_size               = "Standard_DS1_v2"
 
