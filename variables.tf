@@ -3,7 +3,7 @@ variable "azure_subscription_id" {
 
 }
 variable "resource_group_name" {
-  default     = "1-c3c9f8f0-playground-sandbox"
+  default     = "1-e0408e8d-playground-sandbox"
   description = "Resource group name"
   type        = string
 }
@@ -53,14 +53,14 @@ variable "virtual_network_address_space" {
   type        = list(string)
 }
 
-# variable "public_ip_sku" {
-#   description = "Azure Public IP Address SKU"
-#   type        = map(string)
-#   default = {
-#     "eastus"           = "Basic",
-#     "South Central US" = "Standard"
-#   }
-# }
+variable "public_ip_sku" {
+  description = "Azure Public IP Address SKU"
+  type        = map(string)
+  default = {
+    "eastus"           = "Basic",
+    "South Central US" = "Standard"
+  }
+}
 
 variable "common_tags" {
   description = "Common Tags for Azure Resources"

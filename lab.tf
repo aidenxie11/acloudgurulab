@@ -1,4 +1,4 @@
-# 创建网络安全组（NSG）并添加入站规则
+# # 创建网络安全组（NSG）并添加入站规则
 # resource "azurerm_network_security_group" "myrg" {
 #   name                = "mynsg"
 #   location            = azurerm_resource_group.myrg.location
@@ -35,21 +35,21 @@
 #   network_security_group_id = azurerm_network_security_group.myrg.id
 # }
 
-# Create Virtual Network
-resource "azurerm_virtual_network" "myvnet" {
-  name                = "${var.virtual_network_name}-${var.business_unit}-${var.environment}"
-  address_space       = var.virtual_network_address_space
-  location            = azurerm_resource_group.myrg.location
-  resource_group_name = azurerm_resource_group.myrg.name
-  tags                = var.common_tags
-}
+# # Create Virtual Network
+# resource "azurerm_virtual_network" "myvnet" {
+#   name                = "${var.virtual_network_name}-${var.business_unit}-${var.environment}"
+#   address_space       = var.virtual_network_address_space
+#   location            = azurerm_resource_group.myrg.location
+#   resource_group_name = azurerm_resource_group.myrg.name
+#   tags                = var.common_tags
+# }
 
 # # Create Subnet
 # resource "azurerm_subnet" "mysubnet" {
 #   name                 = "${var.subnet_name}-${azurerm_virtual_network.myvnet.name}"
 #   resource_group_name  = azurerm_resource_group.myrg.name
 #   virtual_network_name = azurerm_virtual_network.myvnet.name
-#   address_prefixes     = ["10.3.2.0/24"]
+#   address_prefixes     = ["10.0.1.0/24"]
 # }
 
 # # Create Azure Public IP Address
@@ -108,6 +108,35 @@ resource "azurerm_virtual_network" "myvnet" {
 #     version   = "latest"
 #   }
 #   custom_data = filebase64("${path.module}/app-scripts/app1-cloud-init.txt")
+
+#   connection {
+#     host = self.public_ip_address
+#     type = "ssh"
+#     user = self.admin_username
+#     private_key = file("${path.module}/ssh-keys/id_rsa.pem")
+#   }
+#   provisioner "file" {
+#     source = "apps/file-copy.html"
+#     destination = "tmp/file-copy.html"
+#     on_failure = continue
+#   }
+#   provisioner "file" {
+#     content = "VM Host name: ${self.computer_name}"
+#     destination = "tmp/file.log"
+#     on_failure = continue
+#   }
+
+#   provisioner "file" {
+#     source = "apps/app1"
+#     destination = "/tmp"
+#     on_failure = continue
+#   }
+
+#   provisioner "file" {
+#     source = "apps/app2/"
+#     destination = "/tmp"
+#     on_failure = continue
+#   }
 # }
 
 # resource "azurerm_virtual_network" "main" {
