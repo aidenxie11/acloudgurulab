@@ -68,6 +68,18 @@ resource "azurerm_network_security_group" "myrg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
+  security_rule {
+    name                       = "allow-port"
+    priority                   = 201
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3000"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
 # 将网络安全组关联到子网
@@ -203,7 +215,8 @@ resource "azurerm_virtual_machine_extension" "custom_script" {
         [Service]
         ExecStart=/usr/bin/authbind --deep /usr/bin/code-server
         Restart=always
-        User=testadmin
+        User=root
+        Group=root
         Environment=HOME=/home/testadmin
 
         [Install]
@@ -228,6 +241,10 @@ resource "azurerm_virtual_machine_extension" "custom_script" {
         sudo tee /etc/apt/sources.list.d/azure-cli.list
         sudo apt-get update
         sudo apt-get install azure-cli
+        # 安装 NodeSource 仓库
+        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+        # 安装 Node.js
+        sudo apt install -y nodejs
       EOF
       )}"
     }
